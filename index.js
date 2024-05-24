@@ -50,7 +50,7 @@ const db = client.db("GominosdB")
         const result = await User.toArray();
         res.send(result);
       });
-      
+
       app.get("/food-data-get", async (req, res) => {
         const User =  FoodCollection.find();
         const result = await User.toArray();
@@ -58,6 +58,18 @@ const db = client.db("GominosdB")
       });
  
 
+      app.post("/add-food-data", async (req, res) => {
+        try {
+         const SingleFoodAdd = req.body;
+         console.log(SingleFoodAdd);
+         const result = await FoodCollection.insertOne(SingleFoodAdd);
+         res.send(result);
+        }
+         catch (error) {
+           console.log(error);
+         
+        }
+       });
 
  
   } finally {
