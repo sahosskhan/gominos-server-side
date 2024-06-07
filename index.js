@@ -61,7 +61,6 @@ const db = client.db("GominosdB")
       app.post("/add-food-data", async (req, res) => {
         try {
          const SingleFoodAdd = req.body;
-         console.log(SingleFoodAdd);
          const result = await FoodCollection.insertOne(SingleFoodAdd);
          res.send(result);
         }
@@ -70,6 +69,15 @@ const db = client.db("GominosdB")
          
         }
        });
+
+       
+
+ app.get("/single-food-data/:id", async (req, res) => {
+  const id = req.params.id;
+  const query = { _id: new ObjectId(id) };
+  const result = await FoodCollection.findOne(query);
+  res.send(result);
+});
 
  
   } finally {
